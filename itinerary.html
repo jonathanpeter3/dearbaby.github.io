@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our Itinerary</title>
+  <!-- Google Font for a cute, handwritten feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    /* General body styling */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffeff5; /* Pink background */
+      color: #d62839;
+      font-family: 'Pacifico', cursive;
+      overflow-x: hidden;
+      height: 100%;
+      padding-top: 50px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 3.5em;
+      color: #d62839;
+      margin-bottom: 30px;
+    }
+    /* Timeline styling */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      height: 100%;
+      width: 6px;
+      background-color: #ff6b81;
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      padding: 20px;
+      position: relative;
+      margin: 20px 0;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 45%;
+    }
+    .timeline-item.left {
+      left: 0;
+      margin-left: 20px;
+    }
+    .timeline-item.right {
+      left: 50%;
+      margin-right: 20px;
+    }
+    .timeline-item .content {
+      padding: 10px;
+      background-color: #f9c8d4;
+      border-radius: 8px;
+      position: relative;
+    }
+    .timeline-item .time {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    .timeline-item .description {
+      margin-top: 10px;
+      font-size: 1.1em;
+    }
+    .timeline-item .date {
+      position: absolute;
+      top: -10px;
+      right: 10px;
+      font-size: 0.9em;
+      color: #888;
+    }
+    .timeline-item img {
+      width: 100%;
+      max-width: 150px; /* Adjust the size of the GIF */
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+    /* Floating hearts animation */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      background-color: #ff6b81;
+      width: 15px;
+      height: 15px;
+      transform: rotate(45deg);
+      animation: floatUp 6s infinite;
+      opacity: 0.7;
+    }
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      background-color: #ff6b81;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+    }
+    .heart:before {
+      top: -8px;
+      left: 0;
+    }
+    .heart:after {
+      left: 8px;
+      top: 0;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(80px) translateY(-200px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Valentine's Day Itinerary</h1>
+
+  <div class="timeline">
+    <div class="timeline-item left">
+      <div class="content">
+        <div class="time">10:00 AM</div>
+        <div class="description">Start the day with breakfast at your favorite cozy café.</div>
+        <div class="date">February 14, 2025</div>
+        <img src="cinnamoroll.gif" alt="Breakfast GIF" /> <!-- GIF for the breakfast activity -->
+      </div>
+    </div>
+
+    <div class="timeline-item right">
+      <div class="content">
+        <div class="time">12:00 PM</div>
+        <div class="description">Go for a scenic walk in the park and enjoy the fresh air.</div>
+        <div class="date">February 14, 2025</div>
+        <img src="park-walk-gif.gif" alt="Park Walk GIF" /> <!-- GIF for the park walk -->
+      </div>
+    </div>
+
+    <div class="timeline-item left">
+      <div class="content">
+        <div class="time">2:00 PM</div>
+        <div class="description">Enjoy a romantic lunch at a restaurant with a view.</div>
+        <div class="date">February 14, 2025</div>
+        <img src="lunch-gif.gif" alt="Lunch GIF" /> <!-- GIF for lunch -->
+      </div>
+    </div>
+
+    <div class="timeline-item right">
+      <div class="content">
+        <div class="time">4:00 PM</div>
+        <div class="description">Take a relaxing boat ride together by the river.</div>
+        <div class="date">February 14, 2025</div>
+        <img src="boat-ride-gif.gif" alt="Boat Ride GIF" /> <!-- GIF for the boat ride -->
+      </div>
+    </div>
+
+    <div class="timeline-item left">
+      <div class="content">
+        <div class="time">7:00 PM</div>
+        <div class="description">Finish the day with a candlelit dinner at a romantic venue.</div>
+        <div class="date">February 14, 2025</div>
+        <img src="dinner-gif.gif" alt="Dinner GIF" /> <!-- GIF for the dinner -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Hearts (Optional) -->
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+
+  <audio id="bg-music" src="palagi.mp3" loop></audio>
+
+  <script>
+    // If the music is already playing from the index page, keep it playing
+    if (localStorage.getItem('musicPlaying') === 'true') {
+      const audio = document.getElementById('bg-music');
+      audio.play();
+    }
+  </script>
+
+</body>
+</html>
