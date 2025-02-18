@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu</title>
+  <!-- Google Font for a cute, handwritten feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    /* Basic body styling */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffeff5; /* Soft background color */
+      font-family: 'Pacifico', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3.5em;
+      color: #d62839;
+      margin-bottom: 30px;
+    }
+
+    .menu {
+      /* Optional: remove container background for a seamless look */
+    }
+
+    /* Flex container for menu options aligned horizontally */
+    .menu-options {
+      display: flex;
+      justify-content: center;
+      gap: 40px; /* Increase spacing between options */
+    }
+
+    /* Style for each menu option as a circular button */
+    .menu-options a {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #ff6b81;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .menu-options a:hover {
+      transform: scale(1.1);
+      background-color: #d62839;
+    }
+
+    /* Icon styling: adjust size as needed */
+    .menu-options img {
+      width: 60%;
+      height: 60%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu">
+    <h1>Welcome to Our Special Day</h1>
+    <div class="menu-options">
+      <a href="message.html">
+        <img src="letter.png" alt="Message">
+      </a>
+      <a href="memories.html">
+        <img src="photo-book.png" alt="Memories">
+      </a>
+      <a href="https://open.spotify.com/playlist/5NAVGiA3bEBB5aOoW8Dc4c?si=l8IKGcsyQeOGE9Efd1YaeA" target="_blank">
+        <img src="music.png" alt="Playlist">
+      </a>
+    </div>
+  </div>
+</body>
+</html>

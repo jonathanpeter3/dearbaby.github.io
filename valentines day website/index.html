@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dear Sandra</title>
+  <!-- Google Font for a cute, handwritten feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    /* General body styling */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffeff5; /* Pink background */
+      color: #d62839;
+      font-family: 'Pacifico', cursive;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .container {
+      text-align: center;
+      z-index: 1;
+    }
+    h1 {
+      font-size: 4em;
+      margin-bottom: 20px;
+    }
+    /* Flex container for Yes and No buttons */
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px; /* Space between Yes and No buttons */
+      align-items: center;
+    }
+    /* Button styling */
+    .btn, .no-btn {
+      display: inline-block;
+      padding: 10px 20px; /* Reduced padding for smaller buttons */
+      background-color: #d62839;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2em; /* Reduced font size */
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+      width: 150px; /* Smaller width */
+      text-align: center;
+    }
+    .btn:hover, .no-btn:hover {
+      background-color: #a11d2c;
+    }
+    /* Heart shape styling & animation */
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      background-color: #ff6b81;
+      width: 20px;
+      height: 20px;
+      transform: rotate(45deg);
+      animation: floatUp 6s infinite;
+    }
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      background-color: #ff6b81;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+    .heart:before {
+      top: -10px;
+      left: 0;
+    }
+    .heart:after {
+      left: 10px;
+      top: 0;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(100px) translateY(-800px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    /* Container for dynamically generated hearts */
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+    /* The No prompt that moves and fades */
+    .no-btn {
+      position: relative; /* Remove absolute positioning */
+      cursor: pointer;
+      transition: transform 0.1s ease, opacity 0.3s ease, top 0.3s ease, left 0.3s ease;
+      z-index: 2;
+    }
+    /* GIF styling */
+    .gif-container {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- GIF above the title -->
+    <div class="gif-container">
+      <img src="pixel-heart.gif" alt="Valentine's GIF" width="200px" /> <!-- Replace with your GIF URL -->
+    </div>
+    <h1>can i be your Valentine?</h1>
+    <!-- Yes and No buttons side by side -->
+    <div class="btn-container">
+      <a class="btn" href="menu.html">Yes, Show Me Our Itinerary</a>
+      <div class="no-btn">No</div>
+    </div>
+  </div>
+  
+  <!-- Container where hearts will be added -->
+  <div class="hearts"></div>
+  
+  <!-- Background Music (replace "palagi.mp3" with your own audio file if needed) -->
+  <audio id="bg-music" src="palagi.mp3" loop></audio>
+
+  <script>
+    // Play the audio when the user clicks anywhere on the page
+    document.body.addEventListener('click', function() {
+      const audio = document.getElementById('bg-music');
+      audio.play(); // Play the audio
+      localStorage.setItem('musicPlaying', 'true'); // Save the state to localStorage
+    });
+
+    
+    // If the music is already playing from another page, keep it playing
+    if (localStorage.getItem('musicPlaying') === 'true') {
+      const audio = document.getElementById('bg-music');
+      audio.play();
+    }
+
+    // Generate multiple hearts at random positions and intervals
+    const heartsContainer = document.querySelector('.hearts');
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      // Set a random size between 10px and 30px
+      const size = Math.random() * 20 + 10;
+      heart.style.width = `${size}px`;
+      heart.style.height = `${size}px`;
+      // Position the heart at a random horizontal location
+      heart.style.left = Math.random() * 100 + '%';
+      // Randomize the animation duration for variety
+      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+      heart.style.opacity = Math.random();
+      heartsContainer.appendChild(heart);
+      // Remove the heart after its animation completes
+      setTimeout(() => {
+        heart.remove();
+      }, parseFloat(heart.style.animationDuration) * 1000);
+    }
+    setInterval(createHeart, 300);
+
+    // Make the "No" prompt move far away from the cursor immediately and prevent hover
+    const noButton = document.querySelector('.no-btn');
+    const maxDistance = 150; // distance within which the "No" button moves
+
+    document.addEventListener('mousemove', (event) => {
+      const x = event.clientX;
+      const y = event.clientY;
+      const buttonRect = noButton.getBoundingClientRect();
+      const buttonX = buttonRect.left + buttonRect.width / 2;
+      const buttonY = buttonRect.top + buttonRect.height / 2;
+      const distance = Math.hypot(x - buttonX, y - buttonY);
+
+      if (distance < maxDistance) {
+        // Calculate the angle between the cursor and the button
+        const angle = Math.atan2(y - buttonY, x - buttonX);
+        const moveDistance = (maxDistance - distance) * 3; // Move far away with higher multiplier
+
+        // Move the button far away from the cursor
+        noButton.style.transform = `translate(${Math.cos(angle) * moveDistance}px, ${Math.sin(angle) * moveDistance}px)`;
+
+        // Prevent the cursor from hovering over the button by disabling pointer-events
+        noButton.style.pointerEvents = 'none';
+      } else {
+        // Reset the pointer-events so it can be interacted with again
+        noButton.style.pointerEvents = 'auto';
+        noButton.style.transform = 'translate(0, 0)';
+      }
+    });
+
+    // Move the "No" prompt far away when clicked
+    noButton.addEventListener('click', () => {
+      const maxX = window.innerWidth - noButton.offsetWidth;
+      const maxY = window.innerHeight - noButton.offsetHeight;
+
+      // Randomly generate new position
+      const newPosX = Math.random() * maxX;
+      const newPosY = Math.random() * maxY;
+
+      // Apply new position and reset pointer-events to allow interaction again
+      noButton.style.left = `${newPosX}px`;
+      noButton.style.top = `${newPosY}px`;
+      noButton.style.pointerEvents = 'auto';
+    });
+  </script>
+</body>
+</html>

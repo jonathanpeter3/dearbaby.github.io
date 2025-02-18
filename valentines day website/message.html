@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Message</title>
+  <!-- Google Font for a cute, handwritten feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    /* Overall page styling */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffeff5; /* Pink background */
+      color: #d62839;
+      font-family: 'Pacifico', cursive;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      position: relative;
+      overflow: auto;
+    }
+    .container {
+      max-width: 800px;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 3.5em;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.5em;
+      line-height: 1.6;
+    }
+    /* Floating Hearts Animation */
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      background-color: #ff6b81;
+      width: 20px;
+      height: 20px;
+      transform: rotate(45deg);
+      animation: floatUp 6s infinite;
+    }
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      background-color: #ff6b81;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+    .heart:before {
+      top: -10px;
+      left: 0;
+    }
+    .heart:after {
+      left: 10px;
+      top: 0;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(100px) translateY(-800px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <br><br><br><h1>to my forever Valentine</h1>
+    <p>
+      i know it's a bit late, and as im completing this message it's 2pm on 18th February 2025, i just want to say
+      that you're my everything. I've never felt this much love for anyone else in my life before, kahit family, kahit friends, kahit sino.
+      You're the one that I have found all this love kept in my heart for, and to you I would give anything and everything, just to see
+      you smile. God has gifted and blessed me with this love that I get to share with you, and through every difficult moment, through every
+      fun time we have, I will always love you with all my heart, and in every way possible.<br></br.> 
+
+      <br></br.>I love you more than I'm able to express, and more than anything in this world, and you truly are my everything.
+      I'm sorry din if I ever do something wrong, and I want you to know that i'm always praying, and finding ways to be even better
+      than before, for you. I truly want to be with you, and i want to be the best for you, and i want you to truly have everything this world
+      can offer. <br></br.><br></br.>
+
+      Thank you for everything my love, for making me laugh always, for the long gaming sessions we have, playing fisch together, playing horror games,
+      watching horror movies, watching random movies, for always being supportive of me, for all your efforts, for taking care of me palagi emotionally,
+      for being the best support system for me, and for always being patient through everything. and promiseeeee, for the first time in
+      my life, I'm truly certain of one thing, and it's that I want to be yours forever, and i want to be your husband. 
+
+      I love you with all my heart, and I hope you always know that i'm here always, to give you everything, and to be the best for you.
+      I love you baby ♡<br>
+      -jon
+    </p>
+  </div>
+  
+  <!-- Floating Hearts Container -->
+  <div class="hearts"></div>
+  
+  <script>
+    // Floating Hearts Animation Script
+    const heartsContainer = document.querySelector('.hearts');
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      // Set a random size between 10px and 30px
+      const size = Math.random() * 20 + 10;
+      heart.style.width = `${size}px`;
+      heart.style.height = `${size}px`;
+      // Position the heart at a random horizontal location
+      heart.style.left = Math.random() * 100 + '%';
+      // Randomize the animation duration for variety
+      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+      heart.style.opacity = Math.random();
+      heartsContainer.appendChild(heart);
+      // Remove the heart after its animation completes
+      setTimeout(() => {
+        heart.remove();
+      }, parseFloat(heart.style.animationDuration) * 1000);
+    }
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
